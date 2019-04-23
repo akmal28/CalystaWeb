@@ -1,0 +1,36 @@
+copy list_jasa from 'D:\data_updated_for_akmal_udin\list_jasa.csv'delimiter','csv header;
+
+create table list_produk (no int, kategori varchar(70), kode varchar(70), pack varchar(70), harga int);
+copy list_produk from 'D:\data_updated_for_akmal_udin\list_produk3.csv'delimiter','csv header;
+
+create table omzet_okt_barang(no int, nama_barang varchar(70), kategori varchar(70), jumlah int, harga int, total int);
+copy omzet_okt_barang from 'D:\data_updated_for_akmal_udin\omzet_okt_barang.csv'delimiter','csv header;
+
+create table omzet_okt_jasa (no int, nama_jasa varchar(70), kategori varchar(70), jumlah int);
+copy omzet_okt_jasa from 'D:\data_updated_for_akmal_udin\omzet_okt_jasa.csv'delimiter','csv header;
+
+create table omzet_sep_barang(no int, nama_barang varchar(70), kategori varchar(70), jumlah int, harga int, total int);
+copy omzet_sep_barang from 'D:\data_updated_for_akmal_udin\omzet_sep_barang.csv'delimiter','csv header;
+
+create table omzet_sep_jasa (no int, nama_jasa varchar(70), kategori varchar(70), jumlah int);
+copy omzet_sep_jasa from 'D:\data_updated_for_akmal_udin\omzet_sep_jasa.csv'delimiter','csv header;
+
+copy list_pegawai from 'D:\akmal\tugas\Semester 5\SBD\Proyek\list_pegawai.csv'delimiter','csv header;
+
+copy transaksi_produk from 'D:\akmal\tugas\Semester 5\SBD\Proyek\transaksi_produk.csv'delimiter','csv header;
+
+copy tx_jasa from 'D:\akmal\tugas\Semester 5\SBD\Proyek\transaksi_jasa3.csv'delimiter','csv header;
+
+copy list_produk from 'D:\akmal\tugas\Semester 5\SBD\Proyek\fix\list_produk3.csv'delimiter','csv header;
+
+copy list_jasa from 'D:\akmal\tugas\Semester 5\SBD\Proyek\fix\list_jasa3.csv'delimiter','csv header;
+
+copy tx_produk from 'D:\akmal\tugas\Semester 5\SBD\Proyek\fix\transaksi_produk3.csv'delimiter','csv header;
+
+
+
+QUERY ANJAY
+
+-BUAT DATA TRANSAKSI + HARGA&TOTAL+NAMA+KODE
+create view tx_p_komplit as select id_transaksi, tx_produk.id_pelanggan,list_pelanggan.nama, tx_produk.id_produk, list_produk.kode, list_produk.harga,jumlah,list_produk.harga*jumlah as total,tanggal from tx_produk inner join list_produk on tx_produk.id_produk = list_produk.id_produk inner join list_pelanggan on tx_produk.id_pelanggan = list_pelanggan.id_pelanggan order by id_transaksi asc;
+
